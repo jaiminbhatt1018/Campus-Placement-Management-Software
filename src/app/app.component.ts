@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,13 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'placement_management_System';
-  isLogin: boolean = false;
-  isRegistered: boolean = false;
-
-  toggleBtns() {
-   this.isLogin = true;
-  this.isRegistered = true;
+  // isLogin: boolean = false;
+  // isRegistered: boolean = false;
+  logoutBtn=false;
+  constructor(private router:Router){
+    
   }
+ 
 
 }
 

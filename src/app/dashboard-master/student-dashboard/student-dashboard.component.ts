@@ -1,34 +1,41 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { DataSource } from '@angular/cdk/table';
+import { StudentApisService } from 'src/app/services/student-apis.service';
+import { Route, Router } from '@angular/router';
 
-import { MatTableDataSource } from '@angular/material/table';
-export interface PeriodicElement {
-  name: string;
-  position: string;
-  CTC: string;
-}
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 'Web developer', name: 'herald logic', CTC: '7 LPA to 10 LPA' },
-  {
-    position: 'IOS developer',
-    name: 'NJ Technologies',
-    CTC: '7 LPA to 10 LPA',
-  },
-  { position: 'react developer', name: 'Riversand', CTC: '7 LPA to 10 LPA' },
-  {
-    position: 'java developer',
-    name: 'Responscity Systems',
-    CTC: '7 LPA to 10 LPA',
-  },
-  { position: 'Network Engineer', name: 'IBM', CTC: '7 LPA to 10 LPA' },
-];
+
 @Component({
   selector: 'app-student-dashboard',
   templateUrl: './student-dashboard.component.html',
   styleUrls: ['./student-dashboard.component.scss'],
 })
 export class StudentDashboardComponent implements OnInit {
-  constructor(private elementRef: ElementRef) {}
+
+  currentUser = localStorage.getItem("studentName")
+    
+ profilePic:string="../../assets/"+localStorage.getItem("profilePic") ;
+ 
+  constructor(private elementRef: ElementRef ,private services:StudentApisService,private router:Router) {
+
+    if(!localStorage.getItem("spid")){
+      localStorage.clear()
+      this.router.navigate(['/auth/login/student'])
+
+    }else{
+      this.services.getMyDetail(localStorage.getItem("spid")).subscribe((data:any)=>{
+        if(data.error){
+              if(data.error =="noToken" || data.error == 'tokenExpired'){
+                alert("session is expired !")
+                localStorage.clear();
+                this.router.navigate(['/auth/login/student'])
+              }
+        }
+      })
+
+    }
+   
+
+  }
   showFiller = false;
   panelOpenState = true;
   //side navigation menu options
@@ -37,12 +44,8 @@ export class StudentDashboardComponent implements OnInit {
       heading: 'job profile',
       links: [
         {
-          title: 'Add Job Profile',
+          title: 'Job Profile',
           url: '/dashboard/student/AddJobProfile',
-        },
-        {
-          title: 'View job Profile',
-          url: '/dashboard/ViewJobProfile',
         },
       ],
     },
@@ -55,20 +58,20 @@ export class StudentDashboardComponent implements OnInit {
         },
         {
           title: 'View sheduled',
-          url: '/dashboard/student/prePlacementTalkList',
+          url: '/dashboard/student/talklist',
         },
       ],
     },
     {
-      heading: 'Apply For Jobs',
+      heading: 'Jobs Section',
       links: [
         {
-          title: 'fdsfsd',
-          url: '/dashboard/student/AddJobProfile',
+          title: 'View Openings',
+          url: '/dashboard/student/ViewOpenings',
         },
         {
-          title: 'fsfdsf',
-          url: '/dashboard/ViewJobProfile',
+          title: 'check Status',
+          url: '/dashboard/student/CheckStatus',
         },
       ],
     },
@@ -76,13 +79,10 @@ export class StudentDashboardComponent implements OnInit {
       heading: 'My Profile',
       links: [
         {
-          title: 'fdsfsd',
-          url: '/dashboard/student/AddJobProfile',
+          title: 'View Profile',
+          url: '/dashboard/student/ViewProfile',
         },
-        {
-          title: 'fsfdsf',
-          url: '/dashboard/ViewJobProfile',
-        },
+        
       ],
     },
   ];
@@ -96,14 +96,10 @@ export class StudentDashboardComponent implements OnInit {
   pending: number = 0;
   Shortlisted: number = 0;
   Selected: number = 0;
-  defaultcontent = true;
-  changeDefaultContent() {
-    this.defaultcontent == true
-      ? (this.defaultcontent = false)
-      : (this.defaultcontent = true);
-  }
+
 
   ngOnInit(): void {
+
     console.log(this.MenuList[0]);
 
     var s = document.createElement('script');
@@ -117,11 +113,7 @@ export class StudentDashboardComponent implements OnInit {
       : (this.isMenuOpne = false);
     drawer.toggle();
   }
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+
+
 }

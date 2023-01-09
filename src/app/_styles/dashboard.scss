@@ -1,0 +1,121 @@
+.mat-drawer-side{
+    box-shadow: 3px 0px 10px rgba(35, 40, 68, 0.15) !important;
+  
+  }
+  .mainNavDiv{
+    padding-top: 5rem;
+  background-color: $blue;
+  
+  border: none;
+  
+  position: fixed;
+  
+  img{
+    margin: 1.5rem 0rem;
+    height: 7rem ;
+    border-radius: 5px;
+    width:7rem;
+  
+  }
+  }
+
+  .mat-drawer-inner-container{
+    background-color: $blue;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+  border:none;
+  
+  }
+  .example-sidenav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width:15rem;
+    background-color: $primary;
+    
+    justify-content: flex-start;
+  }
+  .mat-drawer-content{
+  
+  border: none;
+  }
+  
+  .main-content{
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    padding-top: 4rem;
+background-color: rgb(241, 241, 241);
+  }
+  
+  .example-container {
+    width: 100vw;
+    height: auto;
+  }
+ 
+  
+.mat-accordion .mat-expansion-panel:last-of-type {
+    border-radius: 0px;
+  // margin-bottom: 1rem;
+  }
+  .mat-expansion-panel-body{
+    padding-bottom: 0 !important;
+  }
+  .mat-expansion-panel {
+    width: 15rem;
+    box-shadow:  none !important;
+    background-color: $blue;
+    color:$primary !important;
+    border: none;
+    // border-bottom: 2px solid $blue;
+    li{
+      color: rgba(255, 255, 255, 0.607);
+    }
+  }
+  
+  .mat-expansion-panel-header-title{
+    color: $primary !important;
+    height: 2rem !important;
+
+    
+  }
+  
+  .mat-expansion-panel:not(.mat-expanded):not([aria-disabled=true]) .mat-expansion-panel-header:hover {
+    background:$blue
+  }
+  
+  .mat-expansion-panel-header-description,
+  .mat-expansion-indicator::after {
+    color: $yellow !important;
+    
+  }
+  .--sub-heading{
+    color: $blue !important;
+    margin: 2rem 0rem;
+    font-weight: 600;
+  }
+  .submit-btn{
+    background-color: $blue !important;
+    color: $primary !important;
+    border: none;
+    border-radius: 4px ;
+    padding: 0.3rem 0.6rem;
+  }
+  .mat-dialog-container{
+    margin-top: 3rem !important;
+    padding:1.5rem 3rem !important;
+    width: 50rem !important;
+    max-height: 40rem !important;
+    z-index: 1031 !important;
+    overflow-y: auto !important;
+    
+}
+// .mat-card {
+//   box-shadow: 0px 4px 8px rgba(27, 33, 44, 0.1) !important;
+//   border-radius: 4px;
+//   margin: 2rem 0rem ;
+//   background-color: $primary;
+//   padding: 1.5rem !important;
+// }

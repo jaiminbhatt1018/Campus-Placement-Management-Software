@@ -1,0 +1,34 @@
+// .h-100{
+// min-height: 400px;
+// }
+// .--center-element{
+//     width: 100%!important;
+//     height: 100%!important;
+// }
+@import '../../../../_styles/variables.scss';
+
+.main{
+    display: flex;
+    justify-content: center;
+
+}
+.box-heading{
+    font-size: 2.2rem;
+    color: $blue;
+}
+.box-sub-heading{
+    font-size: 1.5rem;
+    color: $yellow;
+    margin-bottom: 1rem;
+
+}
+.data-label{
+    font-size: 1rem;
+    margin-top: 1rem;
+    color: rgba(0, 0, 0, 0.618) ;
+    padding: 0rem !important;
+}
+.api-data{
+    font-size:1.2rem;
+    color: black;
+}

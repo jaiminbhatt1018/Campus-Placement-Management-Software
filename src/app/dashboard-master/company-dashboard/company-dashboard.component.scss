@@ -6,7 +6,6 @@ body{
     height: 100vh;
   }
   .example-sidenav{
-    width: 15vw;
     background-color: #1D1919;
   }
   .example-sidenav-content {
@@ -33,5 +32,8 @@ body{
   .--height-full{
     height: 100%;
   }
-  
+  .mat-expansion-pane-body{
+    padding: 0px 0px !important;
+  }
+ 
   

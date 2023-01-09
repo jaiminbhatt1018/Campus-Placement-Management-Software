@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, NgModel} from '@angular/forms'
+import { Router } from '@angular/router';
 import { CompanyApisService } from 'src/app/services/company-apis.service';
 import { CriteriaApisService } from 'src/app/services/criteria-apis.service';
 
@@ -18,9 +19,9 @@ export class OfferFormComponent implements OnInit {
   minCTC!:Number;
   maxCTC!:Number;
   isDisclose!:Number;
-  criterias!:NgModel;
+  criterias!:String[];
   criteriaList:any = []
-  constructor(private cservices:CriteriaApisService ,private offerservice: CompanyApisService) {
+  constructor(private cservices:CriteriaApisService ,private offerservice: CompanyApisService,private router:Router) {
     cservices.getCriteriaList().subscribe((data)=>{
       this.criteriaList=data;
     })
@@ -28,10 +29,16 @@ export class OfferFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
+handleSelChange(data:any){
 
+  this.criterias=[]
+  data.forEach((element:any )=> {
+  this.criterias.push(element)
+  });
+}
 handleSubmit(){
  this.offerservice.createOffer({
-  companyID : sessionStorage.getItem('companyID') ,
+  companyID : localStorage.getItem('companyId') ,
   position : this.position ,
   technology : this.technology,
   jobDescription : this.jobDescription ,
@@ -39,9 +46,11 @@ handleSubmit(){
   minCTC :this.minCTC ,
   maxCTC:this.maxCTC ,
   isDisclose : (this.minCTC==0 && this.maxCTC==0)?false:true,
-  criterias: this.criteriaList
+  criterias: this.criterias
  }).subscribe((data)=>{
   alert(" offer created")
+this.router.navigate(["dashboard/company/"]);
  })
 }
 }
+

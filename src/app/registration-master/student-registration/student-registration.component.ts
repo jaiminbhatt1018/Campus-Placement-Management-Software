@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { read } from '@popperjs/core';
 import { CommonApisService } from 'src/app/services/common-apis.service';
 import { StudentApisService } from 'src/app/services/student-apis.service';
@@ -17,12 +18,16 @@ contactNo!:Number;
 email!:String;
 password!:String;
 photo!:String;
-courseList!:any[] ;
+registered=false;
+courseList!: any[];
+  confirmPassword!:String;
+  errorMsg!: string;
+  validMsg!: string;
 
-  constructor(private service:StudentApisService, private cservices :CommonApisService) { 
+  constructor(private service:StudentApisService, private cservices :CommonApisService ,private router:Router) {
        cservices.getCourses().subscribe((data:any)=>{
             this.courseList = data ;
-            console.log(this.courseList)
+
        })
   }
 
@@ -42,8 +47,19 @@ password:this.password,
 photo:this.photo
  }
 
-  this.service.registerStudent(stu).subscribe((data)=>{
-alert(data);
+  this.service.registerStudent(stu).subscribe((data:any)=>{
+    if(data.error){
+      alert(data.error);
+      
+    }
+    if(data.success){
+      this.registered =true;
+      setTimeout(() => {
+        this.router.navigate(['auth/login/student'])
+      }, 2000);
+    }
+   
+    
   })
 }
 
@@ -56,6 +72,21 @@ alert(data);
         this.url=event.target.result;
       }
       this.isPreview == false ? this.isPreview = true : this.isPreview = false;
+    }
+  }
+
+  onconfirmPassword(pass: String, confirmpass: String) {
+
+    if (!this.confirmPassword) {
+      this.errorMsg = '';
+    }
+    else if (pass != confirmpass) {
+      this.validMsg = '';
+      this.errorMsg="Doesn't Match With Yor Password!"
+    }
+    else {
+      this.errorMsg = '';
+      this.validMsg = 'Password Matched!';
     }
   }
 

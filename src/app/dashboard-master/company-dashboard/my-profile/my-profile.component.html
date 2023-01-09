@@ -1,0 +1,130 @@
+<div class="container">
+  <h3 class="--sub-heading">Company Profile</h3>
+
+  <!-- <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">User</a></li>
+                <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+     -->
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="mb-4">
+        <mat-card class="card-body text-center">
+          <img src="https://cdn.dribbble.com/users/1549357/screenshots/10805113/media/a98d3f252c1766653c1a3a50604ffb93.png" alt="avatar"
+            class="rounded-circle img-fluid" style="width: 20rem" />
+          <h5 class="my-3">{{companyData.name}}</h5>
+          <p class="text-muted mb-4">{{companyData.wesite}}</p>
+
+        </mat-card>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="mb-4">
+        <mat-card class="card-body p-5">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1">Name</p>
+            </div>
+            <div class="col-sm-9">
+              <input class="text-muted mb-0 w-100 form-control" [(ngModel)]="companyData.name" name="name"
+                [readOnly]="!IsEditable" #name="ngModel" required />
+              <div class="error" *ngIf="(name.touched||name.dirty) && name.invalid" style="color: red; font-size:12px">
+                Name Is Required.</div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1">Email</p>
+            </div>
+            <div class="col-sm-9">
+              <input class="text-muted mb-0 w-100 form-control" [(ngModel)]="companyData.email" name="email"
+                [readOnly]="!IsEditable" #email="ngModel" required />
+              <div class="error" *ngIf="(email.touched||email.dirty) && email.invalid"
+                style="color: red; font-size:12px">
+                Email Is Required.</div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1">Contact No</p>
+            </div>
+            <div class="col-sm-9">
+              <input class="text-muted mb-0 w-100 form-control" [(ngModel)]="companyData.contactNo" name="contactNo"
+                [readOnly]="!IsEditable" #phone="ngModel" required />
+              <div class="error" *ngIf="(phone.touched||phone.dirty) && phone.invalid"
+                style="color: red; font-size:12px">
+                phone Is Required.</div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1">Address</p>
+            </div>
+            <div class="col-sm-9">
+              <textarea class="text-muted mb-0 w-100 form-control" [(ngModel)]="companyData.address" name="address"
+                row="3" [readOnly]="!IsEditable" #address="ngModel" required>
+                {{companyData.address}}
+                </textarea>
+              <div class="error" *ngIf="(address.touched||address.dirty) && address.invalid"
+                style="color: red; font-size:12px">
+                Address Is Required.</div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1">Website</p>
+            </div>
+            <div class="col-sm-9">
+              <input class="text-muted mb-0 w-100 form-control" [(ngModel)]="companyData.website" name="website"
+                [readOnly]="!IsEditable" #website="ngModel" required />
+              <div class="error" *ngIf="(website.touched||website.dirty) && website.invalid"
+                style="color: red; font-size:12px">
+                website Is Required.</div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mt-1"> Domain</p>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" [(ngModel)]="companyData.domain" name="domain"
+                class="text-muted mb-0 w-100 form-control" [readOnly]="!IsEditable" #domain="ngModel" required />
+              <div class="error" *ngIf="(domain.touched||domain.dirty) && domain.invalid"
+                style="color: red; font-size:12px">
+                domain Is Required.</div>
+            </div>
+          </div>
+          <div class="mt-3 flex-row d-flex justify-content-center">
+            <div>
+              <button class="submit-btn btn mx-3 px-4" (click)="OnEditRequest()">
+                {{ btnName }}
+              </button>
+            </div>
+            <div *ngIf="IsEditable">
+              <button class="btn-success btn mx-3 px-4" (click)="handleEdit()">
+                Save changes
+              </button>
+            </div>
+            <div *ngIf="!IsEditable">
+              <button class="btn btn-danger mx-3" (click)="openDialog()">
+                Change Password
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

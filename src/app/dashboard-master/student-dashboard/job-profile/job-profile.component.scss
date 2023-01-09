@@ -1,20 +1,16 @@
-.ng-star-inserted {
-  height: 100%;
-  width: 85vw;
-}
-.parent-div {
-  height: 83vh;
-  width: 85vw;
-}
+@import "../../../_styles/variables.scss";
+
+
 .mat-card-title {
   width: 65vw !important;
 }
 
 .mat-card {
-  border-radius: 10px;
-  -webkit-box-shadow: 13px 16px 37px -11px rgba(0, 0, 0, 0.123);
-  -moz-box-shadow: 13px 16px 37px -11px rgba(0, 0, 0, 0.124);
-  box-shadow: 13px 16px 37px -11px rgba(0, 0, 0, 0.117);
+  box-shadow: 0px 4px 8px rgba(27, 33, 44, 0.1);
+  border-radius: 4px;
+  margin: 2rem 0rem ;
+  background-color: $primary;
+  padding: 1.5rem !important;
 }
 .mat-select {
   height: 15px !important;
@@ -24,4 +20,18 @@
 }
 mat-chip-list {
   width: 20rem;
+}
+
+.--tech-style{
+  text-align: center;
+  border-radius: 8px;
+  border:2px dashed $blue;
+  color: $blue;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+.--internship-date{
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-left: 1rem;
 }

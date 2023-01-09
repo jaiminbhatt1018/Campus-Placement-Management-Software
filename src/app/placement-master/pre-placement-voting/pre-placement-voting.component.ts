@@ -1,23 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-export interface CompanyDetails {
-  Companyid: number;
-  CompanyName: string;
-  Date: string;
-  Venue: string;
-  Min_Ctc: number;
-  Max_Ctc: number;
-}
+import { CommonApisService } from 'src/app/services/common-apis.service';
+import { MatTableDataSource } from '@angular/material/table';
 
-const ELEMENT_DATA: CompanyDetails[] = [
-  {
-    Companyid: 1,
-    CompanyName: 'Hydrogen',
-    Date: '12-11-2022',
-    Venue: 'H',
-    Min_Ctc: 200000,
-    Max_Ctc: 300000,
-  },
-];
+
+
+
 
 @Component({
   selector: 'app-pre-placement-voting',
@@ -25,18 +12,52 @@ const ELEMENT_DATA: CompanyDetails[] = [
   styleUrls: ['./pre-placement-voting.component.scss'],
 })
 export class PrePlacementVotingComponent implements OnInit {
-  constructor() {}
 
+  dataSource = new MatTableDataSource<any>();
+  spid:any ;
+  constructor( private commonService: CommonApisService) {
+    this.spid=localStorage.getItem("spid");
+  }
+  todayDate:Date = new Date();
+  
+  checkDate(item:any){
+    if(this.todayDate < new Date(item)){
+      return true;
+    }else{
+      return false;
+    }
+  }
   displayedColumns: string[] = [
     'Companyid',
-    'CompanyName',
-    'Date',
-    'Venue',
+    'CompanyName', 
     'Min Ctc',
     'Max Ctc',
+    'VotingEndDate',
     'action'
   ];
-  dataSource = ELEMENT_DATA;
+onVote(data:any){
+  this.commonService.castVote(this.spid,data).subscribe((data:any)=>{
+    alert("Your Vote casted")
+  })
+  setTimeout(() => {
+    this.getVotingList()
+  }, 500);
+}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(localStorage.getItem("isInPlacementDrive")=="false"){
+      alert("Your are out of placement Drive !")
+    }else
+    {
+      this.getVotingList()
+
+    }
+   
+}
+
+getVotingList(){
+  this.commonService.getStudentNotVotedCompany(this.spid).subscribe((data: any) => {
+    this.dataSource.data =data;
+})
+}
 }
